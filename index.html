@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
     <title>My Bank</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--style css-->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>This is experiment to github</h1>
+	<div class="container">
+		<div id="login-info">
+			<h1 class="display-4 text-center">Welcome to My Bank</h1>
+			<div class="form-info">
+				<input class="form-control" placeholder="Enter Your Email" type="email" name="">
+				<br>
+				<input class="form-control" placeholder="Your Password" type="password" name="">
+				<br>
+				<button id="login" class="btn btn-success">Enter</button>
+			</div>
+		</div>
+
+		<div id="transection">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="deposit status">
+						<h5>Deposit</h5>
+						<h2>$ <span id="currentDeposit">00</span></h2>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="withdraw status">
+						<h5>Withdraw</h5>
+						<h2>$ <span id="currentWithdraw">00</span></h2>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="balance status">
+						<h5>Balance</h5>
+						<h2>$ <span id="currentBalance">1240</span></h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-info">
+						<h4>Deposit</h4>
+						<input id="depositAmount" class="form-control" type="text" placeholder="$ Amount You want to deposit" name="">
+						<br>
+						<button id="addDeposit" class="btn btn-success">Deposit</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-info">
+						<h4>Withdraw</h4>
+						<input id="withdrawAmount" class="form-control" type="text" placeholder="$ Amount You want to Witdraw" name="">
+						<br>
+						<button id="addWithdraw" class="btn btn-success">Withdraw</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/jquery.min.js"></script>
+    <script src="js/propper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    	const loginBtn = document.getElementById('login');
+    	loginBtn.addEventListener("click", function(){
+    		const loginInfo = document.getElementById('login-info');
+    		loginInfo.style.display = "none";
+
+    		const transection = document.getElementById("transection");
+    		transection.style.display = "block";
+    	});
+
+
+
+    	const depositBtn = document.getElementById("addDeposit");
+    	const withdrawBtn = document.getElementById("addWithdraw");
+
+    	depositBtn.addEventListener("click",function(){
+    		const depoAmount = document.getElementById("depositAmount").value;
+    		const depoNumber = parseFloat(depoAmount);
+
+    		// const currentDeposit = document.getElementById("currentDeposit").innerText;
+    		// const currentDepositNumber = parseFloat(currentDeposit);
+    		// const totalDeposit = depoNumber + currentDepositNumber;
+    		// document.getElementById("currentDeposit").innerText = totalDeposit;
+    		updateSpan("currentDeposit",depoNumber);
+
+    		// const currentBalance = document.getElementById("currentBalance").innerText;
+    		// const currentBalanceNumber = parseFloat(currentBalance);
+    		// const totalBalance = currentBalanceNumber + totalDeposit;
+    		// document.getElementById("currentBalance").innerText = totalBalance;
+    		updateSpan("currentBalance",depoNumber);
+
+    		document.getElementById("depositAmount").value = "";
+
+    	});
+    	withdrawBtn.addEventListener("click", function(){
+    		const withdrawAmount = document.getElementById("withdrawAmount").value;
+    		const withNumber = parseFloat(withdrawAmount);
+    		console.log(withNumber)
+    	});
+    	function updateSpan(id, depoNumber){
+    		const currentBalance = document.getElementById(id).innerText;
+    		const currentBalanceNumber = parseFloat(currentBalance);
+    		const totalBalance = currentBalanceNumber + depoNumber;
+    		document.getElementById(id).innerText = totalBalance;
+    	}
+    </script>
 </body>
 </html>
